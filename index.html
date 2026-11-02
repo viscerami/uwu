@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Уля & Варя | 1 Год Вместе ❤️</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Caveat for handwritten romantic accents -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rosebg: '#fff5f7',
+            rosecard: '#ffffff',
+            roseaccent: '#ff8da1',
+            rosedark: '#e06079',
+            softblush: '#fde8ed',
+            softpurple: '#eed9f6',
+            warmgold: '#fceabb',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            handwritten: ['Caveat', 'cursive'],
+          },
+          boxShadow: {
+            soft: '0 10px 30px -5px rgba(255, 141, 161, 0.2)',
+            glow: '0 0 25px rgba(255, 141, 161, 0.4)',
+            pill: '0 4px 15px rgba(224, 96, 121, 0.15)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Global Soft Pink Styling - Strict NO BLACK OUTLINES */
+    * {
+      outline: none !important;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      background-color: #fff5f7;
+      background-image: 
+        radial-gradient(#ff8da1 0.75px, transparent 0.75px), 
+        radial-gradient(#ff8da1 0.75px, #fff5f7 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      font-family: 'Inter', sans-serif;
+      color: #5c3a42;
+      overflow-x: hidden;
+    }
+
+    /* Soft floating hearts background animation canvas */
+    #heartCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Custom Glassmorphism Cards without dark borders */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 200, 210, 0.6);
+      box-shadow: 0 8px 32px 0 rgba(255, 141, 161, 0.12);
+    }
+
+    /* Soft Tab Buttons */
+    .tab-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #ff8da1 0%, #e06079 100%);
+      color: white;
+      box-shadow: 0 6px 20px rgba(224, 96, 121, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* Custom Animations */
+    @keyframes pulse-slow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 3s infinite ease-in-out;
+    }
+
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+    .animate-float {
+      animation: float-gentle 4s infinite ease-in-out;
+    }
+
+    /* Scrollbar soft styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fff5f7;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ffb6c1;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff8da1;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-roseaccent selection:text-white">
+
+  <!-- Background Heart Particle Canvas -->
+  <canvas id="heartCanvas"></canvas>
+
+  <div class="relative z-10 flex-grow flex flex-col">
+    <!-- Header Section -->
+    <header class="w-full pt-8 pb-4 px-4 text-center">
+      <div class="max-w-4xl mx-auto flex flex-col items-center">
+        <!-- Flight & Distance Badge -->
+        <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-md border border-pink-200/60 shadow-pill text-xs md:text-sm font-medium text-rosedark mb-4 animate-float">
+          <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-roseaccent"></i> Долгопрудный (РФ)</span>
+          <span class="text-roseaccent flex items-center gap-1">
+            <span class="h-0.5 w-6 bg-rose-200 rounded-full inline-block"></span>
+            ✈️
+            <span class="h-0.5 w-6 bg-rose-200 rounded-full inline-block"></span>
+          </span>
+          <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-roseaccent"></i> Алматы (КЗ)</span>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-rosedark mb-2 font-handwritten">
+          Варя <span class="text-roseaccent">❤️</span> Уля
+        </h1>
+        <p class="text-sm md:text-base text-rose-700/80 max-w-md">
+          Наш личный уголок тепла, воспоминаний и любви на расстоянии.
+        </p>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex flex-wrap justify-center gap-2 md:gap-4 mt-6 p-1.5 bg-white/70 backdrop-blur-md rounded-2xl border border-pink-200/60 shadow-soft max-w-xl w-full">
+          <button onclick="switchTab('room')" id="tab-room" class="tab-btn active flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs md:text-sm font-semibold flex items-center justify-center gap-2">
+            <i data-lucide="home" class="w-4 h-4"></i> Уютный Уголок
+          </button>
+          <button onclick="switchTab('history')" id="tab-history" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs md:text-sm font-semibold flex items-center justify-center gap-2 text-rose-700 hover:bg-rose-50">
+            <i data-lucide="heart-handshake" class="w-4 h-4"></i> История & Время
+          </button>
+          <button onclick="switchTab('capsule')" id="tab-capsule" class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs md:text-sm font-semibold flex items-center justify-center gap-2 text-rose-700 hover:bg-rose-50">
+            <i data-lucide="mail-heart" class="w-4 h-4"></i> Письма Любви
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-4xl w-full mx-auto px-4 py-6 flex-grow">
+
+      <!-- ================= SECTION 1: COZY ROOM & MINI-GAME ================= -->
+      <section id="section-room" class="space-y-6 transition-all duration-500">
+        
+        <!-- Virtual Cozy Room Card -->
+        <div class="glass-card rounded-3xl p-6 md:p-8 text-center relative overflow-hidden">
+          <div class="flex items-center justify-between mb-4">
+            <div class="text-left">
+              <span class="text-xs uppercase tracking-wider text-rose-400 font-bold">Виртуальная комната</span>
+              <h2 class="text-2xl font-bold text-rosedark">Наш Тёплый Домик 🐾</h2>
+            </div>
+            <span class="px-3 py-1 bg-rose-100 text-rosedark rounded-full text-xs font-medium">Кликай по предметам!</span>
+          </div>
+
+          <!-- Room Scene Graphic area -->
+          <div class="relative w-full h-72 md:h-80 bg-gradient-to-b from-rose-100/70 to-pink-50/90 rounded-2xl p-4 flex flex-col justify-between items-center overflow-hidden border border-pink-200/50 shadow-inner">
+            
+            <!-- Window with stars / moon -->
+            <div class="absolute top-4 right-6 w-20 h-20 bg-amber-100/60 rounded-full blur-sm flex items-center justify-center text-3xl">
+              🌙
+            </div>
+            
+            <!-- Top Shelf / Music Box -->
+            <div class="w-full flex justify-between items-center px-4 z-10">
+              <button onclick="toggleAudio()" class="group flex items-center gap-2 bg-white/90 hover:bg-white px-3 py-2 rounded-xl shadow-sm border border-pink-100 transition transform hover:scale-105">
+                <span id="musicIcon" class="text-2xl group-hover:rotate-12 transition">🎵</span>
+                <div class="text-left">
+                  <p id="musicStatus" class="text-xs font-bold text-rosedark">Включить Музыку</p>
+                  <p class="text-[10px] text-rose-400">Наш вайб ✨</p>
+                </div>
+              </button>
+
+              <button onclick="showRoomModal('coffee')" class="group flex items-center gap-2 bg-white/90 hover:bg-white px-3 py-2 rounded-xl shadow-sm border border-pink-100 transition transform hover:scale-105">
+                <span class="text-2xl group-hover:-rotate-12 transition">☕</span>
+                <div class="text-left">
+                  <p class="text-xs font-bold text-rosedark">Какао & Кофе</p>
+                  <p class="text-[10px] text-rose-400">Воспоминания</p>
+                </div>
+              </button>
+            </div>
+
+            <!-- Virtual Pet Interactive Spot (BIGGER BLACK CAT + DRAGGABLE DRESS-UP ITEMS) -->
+            <div id="petArea" class="my-auto z-10 flex flex-col items-center relative w-full flex-grow justify-center">
+              
+              <!-- Pet Speech Bubble -->
+              <div id="petSpeech" class="opacity-0 transition-opacity duration-300 bg-white/90 px-3 py-1 rounded-full text-xs text-rosedark font-bold mb-1 shadow-sm border border-pink-100 z-20">
+                Мурр! Спасибо за заботу! 💖
+              </div>
+
+              <!-- Draggable Accessories Shelf & Container -->
+              <div class="absolute inset-0 pointer-events-none" id="dressupBounds">
+                <!-- Draggable Items (👑 🎀 🎩 👓 🐟 🧶) -->
+                <div class="draggable-item pointer-events-auto absolute top-2 left-6 cursor-grab active:cursor-grabbing text-3xl select-none transition-transform hover:scale-125 z-30" style="left: 10%; top: 15%;" title="Перетащи на котика!">👑</div>
+                <div class="draggable-item pointer-events-auto absolute top-2 left-16 cursor-grab active:cursor-grabbing text-3xl select-none transition-transform hover:scale-125 z-30" style="left: 20%; top: 50%;" title="Перетащи на котика!">🎀</div>
+                <div class="draggable-item pointer-events-auto absolute cursor-grab active:cursor-grabbing text-3xl select-none transition-transform hover:scale-125 z-30" style="right: 15%; top: 20%;" title="Перетащи на котика!">🎩</div>
+                <div class="draggable-item pointer-events-auto absolute cursor-grab active:cursor-grabbing text-3xl select-none transition-transform hover:scale-125 z-30" style="right: 22%; top: 52%;" title="Перетащи на котика!">👓</div>
+                <div class="draggable-item pointer-events-auto absolute cursor-grab active:cursor-grabbing text-2xl select-none transition-transform hover:scale-125 z-30" style="left: 12%; bottom: 10%;" title="Игрушка для кота">🐟</div>
+                <div class="draggable-item pointer-events-auto absolute cursor-grab active:cursor-grabbing text-2xl select-none transition-transform hover:scale-125 z-30" style="right: 12%; bottom: 10%;" title="Игрушка для кота">🧶</div>
+              </div>
+
+              <!-- Bigger Cute Black Cat SVG -->
+              <div id="virtualPet" onclick="petCat()" class="cursor-pointer transition transform active:scale-95 hover:scale-105 flex flex-col items-center z-10 relative">
+                <div class="relative w-36 h-36 md:w-44 md:h-44">
+                  <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-lg">
+                    <!-- Tail -->
+                    <path d="M 140 140 Q 185 110 165 70 Q 145 50 155 85 Q 165 115 130 145 Z" fill="#2d2226" />
+                    <!-- Body -->
+                    <ellipse cx="100" cy="140" rx="50" ry="38" fill="#2d2226" />
+                    <!-- Paws -->
+                    <ellipse cx="72" cy="172" rx="14" ry="9" fill="#3a2e33" />
+                    <ellipse cx="128" cy="172" rx="14" ry="9" fill="#3a2e33" />
+                    <!-- Head -->
+                    <circle cx="100" cy="85" r="44" fill="#2d2226" />
+                    <!-- Ears -->
+                    <polygon points="62,65 55,20 88,52" fill="#2d2226" />
+                    <polygon points="67,60 60,27 86,50" fill="#ffb6c1" />
+                    <polygon points="138,65 145,20 112,52" fill="#2d2226" />
+                    <polygon points="133,60 140,27 114,50" fill="#ffb6c1" />
+                    <!-- Eyes (Bright Golden Yellow) -->
+                    <ellipse cx="82" cy="80" rx="9" ry="12" fill="#ffd166" />
+                    <ellipse cx="118" cy="80" rx="9" ry="12" fill="#ffd166" />
+                    <ellipse cx="82" cy="80" rx="3.5" ry="9" fill="#1d1317" />
+                    <ellipse cx="118" cy="80" rx="3.5" ry="9" fill="#1d1317" />
+                    <!-- Eye Highlights -->
+                    <circle cx="80" cy="76" r="3" fill="#ffffff" />
+                    <circle cx="116" cy="76" r="3" fill="#ffffff" />
+                    <!-- Nose -->
+                    <polygon points="97,93 103,93 100,98" fill="#ff8da1" />
+                    <!-- Whiskers -->
+                    <path d="M 55 88 L 28 84 M 55 93 L 23 93 M 55 98 L 28 102" stroke="#ffb6c1" stroke-width="2.5" stroke-linecap="round" />
+                    <path d="M 145 88 L 172 84 M 145 93 L 177 93 M 145 98 L 172 102" stroke="#ffb6c1" stroke-width="2.5" stroke-linecap="round" />
+                  </svg>
+                  <span id="heartBurst" class="absolute -top-4 right-2 text-3xl opacity-0 transition-all pointer-events-none">💖</span>
+                </div>
+              </div>
+              
+              <!-- Feed & Pet Buttons -->
+              <div class="flex flex-wrap justify-center gap-2 mt-1 z-20">
+                <button onclick="petCat()" class="px-3.5 py-1.5 bg-gradient-to-r from-pink-200 to-rose-200 hover:from-pink-300 hover:to-rose-300 text-xs font-bold text-rosedark rounded-full shadow-sm border border-pink-200 flex items-center gap-1 transition hover:scale-105">
+                  🐾 Погладить котика
+                </button>
+                <button onclick="feedPet('burger')" class="px-3 py-1.5 bg-white/90 hover:bg-white text-xs text-rosedark rounded-full shadow-sm border border-pink-100 flex items-center gap-1 transition hover:scale-105">
+                  🍔 Бургер
+                </button>
+                <button onclick="feedPet('lemonade')" class="px-3 py-1.5 bg-white/90 hover:bg-white text-xs text-rosedark rounded-full shadow-sm border border-pink-100 flex items-center gap-1 transition hover:scale-105">
+                  🥤 Лимонад
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Cozy Carpet with Game Launch -->
+            <div class="w-full flex justify-center items-end z-10">
+              <button onclick="showRoomModal('game')" class="bg-gradient-to-r from-roseaccent to-rosedark text-white px-5 py-2 rounded-xl shadow-pill text-xs md:text-sm font-semibold flex items-center gap-2 transition hover:scale-105 animate-bounce">
+                🎮 Мини-игра "Собери Пару"
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded Mini Game Container -->
+        <div id="miniGameContainer" class="glass-card rounded-3xl p-6 md:p-8 text-center">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold text-rosedark flex items-center gap-2">
+              <span>🌸</span> Игра: Парные Символы Нашей Любви
+            </h3>
+            <span id="gameScore" class="text-xs font-bold px-3 py-1 bg-rose-100 text-rosedark rounded-full">Найдено пар: 0 / 6</span>
+          </div>
+          
+          <p class="text-xs md:text-sm text-rose-700/80 mb-6">
+            Найди все пары одинаковых иконок нашей истории, чтобы разблокировать праздничный секретный подарок!
+          </p>
+
+          <!-- Memory Card Grid -->
+          <div id="memoryBoard" class="grid grid-cols-3 sm:grid-cols-4 gap-3 max-w-md mx-auto">
+            <!-- Cards will be dynamically populated by JS -->
+          </div>
+
+          <!-- Secret Unlocked Gift Message -->
+          <div id="secretGiftCard" class="hidden mt-6 p-5 bg-gradient-to-r from-pink-100 to-rose-100 rounded-2xl border border-pink-200 text-center animate-fade-in">
+            <span class="text-4xl mb-2 inline-block">🎁</span>
+            <h4 class="text-lg font-bold text-rosedark font-handwritten text-2xl">Секретный промокод на обнимашки unlocked!</h4>
+            <p class="text-xs text-rose-800 mt-1">
+              Ты прошла мини-игру! По предъявлении этого сертификата Варя обязуется обнимать Улю минимум 100 минут подряд при первой же встрече! 🥰
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 2: TIMELINE & COUNTER ================= -->
+      <section id="section-history" class="space-y-6 hidden transition-all duration-500">
+        
+        <!-- Live Counter & Message Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Time Counter (Spans 2 cols) -->
+          <div class="md:col-span-2 glass-card rounded-3xl p-6 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs uppercase tracking-wider text-rose-400 font-bold">Счётчик счастья</span>
+              <span class="text-xs text-rose-500 font-medium">с 3 ноября 2025</span>
+            </div>
+            <h3 class="text-lg font-bold text-rosedark mb-3">Мы официально вместе уже:</h3>
+            
+            <div id="liveTimer" class="grid grid-cols-4 gap-2 text-center">
+              <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 shadow-sm">
+                <span id="timer-days" class="text-2xl md:text-3xl font-extrabold text-rosedark block">365</span>
+                <span class="text-[10px] md:text-xs text-rose-400 uppercase font-medium">Дней</span>
+              </div>
+              <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 shadow-sm">
+                <span id="timer-hours" class="text-2xl md:text-3xl font-extrabold text-rosedark block">00</span>
+                <span class="text-[10px] md:text-xs text-rose-400 uppercase font-medium">Часов</span>
+              </div>
+              <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 shadow-sm">
+                <span id="timer-minutes" class="text-2xl md:text-3xl font-extrabold text-rosedark block">00</span>
+                <span class="text-[10px] md:text-xs text-rose-400 uppercase font-medium">Минут</span>
+              </div>
+              <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 shadow-sm">
+                <span id="timer-seconds" class="text-2xl md:text-3xl font-extrabold text-rosedark block">00</span>
+                <span class="text-[10px] md:text-xs text-rose-400 uppercase font-medium">Секунд</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message Counter Card -->
+          <div class="glass-card rounded-3xl p-6 flex flex-col justify-center items-center text-center bg-gradient-to-br from-white to-pink-50">
+            <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rosedark flex items-center justify-center text-2xl mb-2 shadow-sm">
+              💬
+            </div>
+            <span class="text-2xl md:text-3xl font-black text-rosedark tracking-tight">252 995</span>
+            <p class="text-xs text-rose-600 font-medium mt-1">сообщений отправлено друг другу за всё время!</p>
+          </div>
+        </div>
+
+        <!-- Vertical Timeline Card -->
+        <div class="glass-card rounded-3xl p-6 md:p-8">
+          <h3 class="text-2xl font-bold text-rosedark mb-6 flex items-center gap-2">
+            <span>📖</span> История Наших Чувств
+          </h3>
+
+          <div class="relative border-l-2 border-rose-200 ml-4 md:ml-6 space-y-8">
+            
+            <!-- Event 1 -->
+            <div class="relative pl-6 md:pl-8 group">
+              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-roseaccent border-4 border-white shadow-sm group-hover:scale-125 transition"></div>
+              <span class="text-xs font-bold text-rose-400 bg-rose-100/80 px-2.5 py-1 rounded-full">21 марта 2024</span>
+              <h4 class="text-base font-bold text-rosedark mt-1">Начали общаться ✨</h4>
+              <p class="text-xs md:text-sm text-rose-700/80 mt-1">
+                Первый звонок в общем чате с той самой шизовой девочкой! Вместе играли и сидели, обсуждали абсолютно всё на свете часами подряд.
+              </p>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="relative pl-6 md:pl-8 group">
+              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-roseaccent border-4 border-white shadow-sm group-hover:scale-125 transition"></div>
+              <span class="text-xs font-bold text-rose-400 bg-rose-100/80 px-2.5 py-1 rounded-full">Октябрь 2024</span>
+              <h4 class="text-base font-bold text-rosedark mt-1">Первые ролки 🎭</h4>
+              <p class="text-xs md:text-sm text-rose-700/80 mt-1">
+                Начали впервые ролить вместе. Погрузились в свои сюжеты и персов, где грань общения стала ещё теплее.
+              </p>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="relative pl-6 md:pl-8 group">
+              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-roseaccent border-4 border-white shadow-sm group-hover:scale-125 transition"></div>
+              <span class="text-xs font-bold text-rose-400 bg-rose-100/80 px-2.5 py-1 rounded-full">5 марта 2025</span>
+              <h4 class="text-base font-bold text-rosedark mt-1">"Люблю тебя... по-дружески" 😉</h4>
+              <p class="text-xs md:text-sm text-rose-700/80 mt-1">
+                Впервые признались друг другу в любви, правда пока под соусом "мы просто лучшие подруги". Но искры уже летели!
+              </p>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="relative pl-6 md:pl-8 group">
+              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-roseaccent border-4 border-white shadow-sm group-hover:scale-125 transition"></div>
+              <span class="text-xs font-bold text-rose-400 bg-rose-100/80 px-2.5 py-1 rounded-full">21 марта 2025</span>
+              <h4 class="text-base font-bold text-rosedark mt-1">Годовщина дружбы 🎂</h4>
+              <p class="text-xs md:text-sm text-rose-700/80 mt-1">
+                Отметили ровно один год с нашего самого первого разговора.
+              </p>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="relative pl-6 md:pl-8 group">
+              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-roseaccent border-4 border-white shadow-sm group-hover:scale-125 transition"></div>
+              <span class="text-xs font-bold text-rose-400 bg-rose-100/80 px-2.5 py-1 rounded-full">10 июля 2025</span>
+              <h4 class="text-base font-bold text-rosedark mt-1">Фиктивный брак Ризли 💍</h4>
+              <p class="text-xs md:text-sm text-rose-700/80 mt-1">
+                Начали ролить Ризли с фиктивным браком — сюжет, который навсегда остался легендой в наших логах!
+              </p>
+            </div>
+
+            <!-- Event 6 -->
+            <div class="relative pl-6 md:pl-8 group">
+              <div class="absolute -left-[9px] top-0 w-5 h-5 -ml-0.5 rounded-full bg-rosedark border-4 border-white shadow-glow group-hover:scale-125 transition"></div>
+              <span class="text-xs font-bold text-white bg-gradient-to-r from-roseaccent to-rosedark px-3 py-1 rounded-full shadow-sm">3 ноября 2025</span>
+              <h4 class="text-lg font-extrabold text-rosedark mt-1">НАШ ДЕНЬ! 💖</h4>
+              <p class="text-xs md:text-sm text-rose-800 font-medium mt-1">
+                Официально признались друг другу и начали встречаться. Лучшее решение в нашей жизни!
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Shared Watchlist Embed Section -->
+        <div class="glass-card rounded-3xl p-6 md:p-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold text-rosedark flex items-center gap-2">
+              <span>🍿</span> Просмотрено Вместе 🤗
+            </h3>
+            <span class="text-xs text-rose-400 font-medium">Наш кино-багаж</span>
+          </div>
+          
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">⚔️</span>
+              <span class="text-xs font-semibold text-rosedark block">Аркейн</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">🗡️</span>
+              <span class="text-xs font-semibold text-rosedark block">Голубоглазый самурай</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">🎀</span>
+              <span class="text-xs font-semibold text-rosedark block">Фильмы Монстер Хай</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">🏫</span>
+              <span class="text-xs font-semibold text-rosedark block">Клуб свиданий...</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">✨</span>
+              <span class="text-xs font-semibold text-rosedark block">Эйфория</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">🎲</span>
+              <span class="text-xs font-semibold text-rosedark block">Безумный азарт</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">📜</span>
+              <span class="text-xs font-semibold text-rosedark block">Гордость и предубеждение</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">💎</span>
+              <span class="text-xs font-semibold text-rosedark block">Вселенная Стивена</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">🐻</span>
+              <span class="text-xs font-semibold text-rosedark block">Чиикава</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-2xl border border-pink-100 text-center hover:bg-white hover:shadow-md transition">
+              <span class="text-2xl block mb-1">🌸</span>
+              <span class="text-xs font-semibold text-rosedark block">Мулан</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= SECTION 3: TIME CAPSULE / LETTERS ================= -->
+      <section id="section-capsule" class="space-y-6 hidden transition-all duration-500">
+        
+        <div class="glass-card rounded-3xl p-6 md:p-8 text-center">
+          <span class="text-xs uppercase tracking-wider text-rose-400 font-bold">Цифровая капсула</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-rosedark mb-2">Открой, Когда... ✉️</h2>
+          <p class="text-xs md:text-sm text-rose-700/80 max-w-lg mx-auto mb-8">
+            Здесь собраны открытки и конверты на любой случай жизни. Нажми на любой конверт, чтобы прочитать тёплые слова!
+          </p>
+
+          <!-- Envelope Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Envelope 1 -->
+            <button onclick="openEnvelope('sad')" class="group p-5 bg-gradient-to-br from-white to-pink-50 rounded-2xl border border-pink-200/80 shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-left relative overflow-hidden">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-pink-100 text-roseaccent flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                  🌧️
+                </div>
+                <div>
+                  <h4 class="text-base font-bold text-rosedark">Открой, когда грустно</h4>
+                  <p class="text-xs text-rose-400">Немного тепла в пасмурный день</p>
+                </div>
+              </div>
+            </button>
+
+            <!-- Envelope 2 -->
+            <button onclick="openEnvelope('miss')" class="group p-5 bg-gradient-to-br from-white to-pink-50 rounded-2xl border border-pink-200/80 shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-left relative overflow-hidden">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-pink-100 text-roseaccent flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                  💌
+                </div>
+                <div>
+                  <h4 class="text-base font-bold text-rosedark">Открой, когда скучаешь</h4>
+                  <p class="text-xs text-rose-400">Напоминание, что я всегда рядом</p>
+                </div>
+              </div>
+            </button>
+
+            <!-- Envelope 3 -->
+            <button onclick="openEnvelope('anniversary')" class="group p-5 bg-gradient-to-br from-rose-100 to-pink-100 rounded-2xl border border-rose-300 shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-left relative overflow-hidden">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-white text-rosedark flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                  🎉
+                </div>
+                <div>
+                  <h4 class="text-base font-bold text-rosedark">Открой 3 ноября</h4>
+                  <p class="text-xs text-rose-500 font-semibold">Наше праздничное письмо!</p>
+                </div>
+              </div>
+            </button>
+
+            <!-- Envelope 4 -->
+            <button onclick="openEnvelope('smile')" class="group p-5 bg-gradient-to-br from-white to-pink-50 rounded-2xl border border-pink-200/80 shadow-sm hover:shadow-md transition transform hover:-translate-y-1 text-left relative overflow-hidden">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-pink-100 text-roseaccent flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                  😊
+                </div>
+                <div>
+                  <h4 class="text-base font-bold text-rosedark">Открой, чтобы улыбнуться</h4>
+                  <p class="text-xs text-rose-400">Милые глупости и мимолетный уют</p>
+                </div>
+              </div>
+            </button>
+
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full text-center py-6 text-xs text-rose-400 font-medium">
+      Сделано с любовью ❤️ 3 Ноября 2026
+    </footer>
+  </div>
+
+  <!-- MODAL POPUP -->
+  <div id="modalOverlay" class="fixed inset-0 bg-rosedark/30 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-card bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 relative shadow-2xl border border-pink-200 transform transition-all animate-fade-in">
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-rose-100 hover:bg-rose-200 text-rosedark flex items-center justify-center text-sm transition">
+        ✕
+      </button>
+
+      <div id="modalContent">
+        <!-- Content inserted dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIO SYNTHESIZER SOUND ENGINE (Tone.js free alternative using Web Audio API for soft clicks) -->
+  <script>
+    // Simple Web Audio API sound generator (No external URLs needed!)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playSoftPop() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.1);
+    }
+
+    function playSuccessChime() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const now = audioCtx.currentTime;
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.1, now + i * 0.08);
+        gain.gain.linearRampToValueAtTime(0.01, now + i * 0.08 + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.08);
+        osc.stop(now + i * 0.08 + 0.2);
+      });
+    }
+
+    /* DRAGGABLE ITEMS ENGINE (For Dressing up the cat) */
+    function initDraggables() {
+      const items = document.querySelectorAll('.draggable-item');
+      
+      items.forEach(item => {
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        const startDrag = (e) => {
+          isDragging = true;
+          playSoftPop();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          
+          startX = clientX;
+          startY = clientY;
+          
+          const rect = item.getBoundingClientRect();
+          const parentRect = item.parentElement.getBoundingClientRect();
+          
+          initialLeft = rect.left - parentRect.left;
+          initialTop = rect.top - parentRect.top;
+
+          item.style.left = `${initialLeft}px`;
+          item.style.top = `${initialTop}px`;
+          item.style.right = 'auto';
+          item.style.bottom = 'auto';
+
+          document.addEventListener('mousemove', onDrag);
+          document.addEventListener('touchmove', onDrag, { passive: false });
+          document.addEventListener('mouseup', stopDrag);
+          document.addEventListener('touchend', stopDrag);
+        };
+
+        const onDrag = (e) => {
+          if (!isDragging) return;
+          if (e.cancelable) e.preventDefault();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+          const dx = clientX - startX;
+          const dy = clientY - startY;
+
+          item.style.left = `${initialLeft + dx}px`;
+          item.style.top = `${initialTop + dy}px`;
+        };
+
+        const stopDrag = () => {
+          isDragging = false;
+          document.removeEventListener('mousemove', onDrag);
+          document.removeEventListener('touchmove', onDrag);
+          document.removeEventListener('mouseup', stopDrag);
+          document.removeEventListener('touchend', stopDrag);
+        };
+
+        item.addEventListener('mousedown', startDrag);
+        item.addEventListener('touchstart', startDrag, { passive: false });
+      });
+    }
+
+    /* Virtual Pet Interactivity */
+    function petCat() {
+      playSoftPop();
+      const speech = document.getElementById('petSpeech');
+      const burst = document.getElementById('heartBurst');
+      
+      speech.innerText = "Муррр! Ты погладила котика! 💖✨";
+      speech.classList.remove('opacity-0');
+      
+      burst.classList.remove('opacity-0', '-top-4');
+      burst.classList.add('-top-8');
+
+      setTimeout(() => {
+        speech.classList.add('opacity-0');
+        burst.classList.add('opacity-0', '-top-4');
+        burst.classList.remove('-top-8');
+      }, 2500);
+    }
+
+    function feedPet(item) {
+      playSoftPop();
+      const speech = document.getElementById('petSpeech');
+      if (item === 'burger') {
+        speech.innerText = "Ням! Вкусный бургер! 🍔✨";
+      } else if (item === 'lemonade') {
+        speech.innerText = "Освежающий лимонад! 🥤💖";
+      }
+      speech.classList.remove('opacity-0');
+      setTimeout(() => {
+        speech.classList.add('opacity-0');
+      }, 2500);
+    }
+
+    /* Floating Canvas Hearts */
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+    let hearts = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Heart {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 20;
+        this.size = Math.random() * 12 + 8;
+        this.speedY = Math.random() * 1.2 + 0.5;
+        this.opacity = Math.random() * 0.5 + 0.2;
+        this.color = `rgba(255, ${Math.floor(120 + Math.random() * 60)}, ${Math.floor(160 + Math.random() * 40)}, ${this.opacity})`;
+      }
+      update() {
+        this.y -= this.speedY;
+        if (this.y < -20) this.reset();
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        const x = this.x, y = this.y, s = this.size;
+        ctx.moveTo(x, y);
+        ctx.bezierCurveTo(x - s/2, y - s/2, x - s, y + s/3, x, y + s);
+        ctx.bezierCurveTo(x + s, y + s/3, x + s/2, y - s/2, x, y);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 25; i++) hearts.push(new Heart());
+
+    function animateHearts() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hearts.forEach(h => {
+        h.update();
+        h.draw();
+      });
+      requestAnimationFrame(animateHearts);
+    }
+    animateHearts();
+
+    /* Tab Switching Logic */
+    function switchTab(tabId) {
+      playSoftPop();
+      ['room', 'history', 'capsule'].forEach(id => {
+        document.getElementById(`section-${id}`).classList.add('hidden');
+        document.getElementById(`tab-${id}`).classList.remove('active');
+        document.getElementById(`tab-${id}`).classList.add('text-rose-700', 'hover:bg-rose-50');
+      });
+
+      document.getElementById(`section-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      activeBtn.classList.add('active');
+      activeBtn.classList.remove('text-rose-700', 'hover:bg-rose-50');
+    }
+
+    const BACKGROUND_MUSIC_URL = 'song.mp3'; // <-- Вставь свою ссылку сюда
+
+    const bgAudio = new Audio(BACKGROUND_MUSIC_URL);
+    bgAudio.loop = true;
+    bgAudio.volume = 0.5;
+    let isPlaying = false;
+
+    function toggleAudio() {
+      const statusText = document.getElementById('musicStatus');
+      const musicIcon = document.getElementById('musicIcon');
+
+      if (!isPlaying) {
+        bgAudio.play().then(() => {
+          isPlaying = true;
+          statusText.innerText = "Играет трек ♪";
+          musicIcon.innerText = "⏸️";
+        }).catch(err => {
+          alert("Кликни ещё раз для запуска музыки!");
+        });
+      } else {
+        bgAudio.pause();
+        isPlaying = false;
+        statusText.innerText = "Включить Музыку";
+        musicIcon.innerText = "🎵";
+      }
+    }
+
+    // Modal display
+    function showRoomModal(type) {
+      playSoftPop();
+      const content = document.getElementById('modalContent');
+      if (type === 'coffee') {
+        content.innerHTML = `
+          <div class="text-center">
+            <span class="text-4xl mb-2 inline-block">☕</span>
+            <h3 class="text-xl font-bold text-rosedark mb-2">Виртуальная Чашка Какао</h3>
+            <p class="text-xs text-rose-700 leading-relaxed">
+              Даже если между нами тысячи километров, давай представим, что прямо сейчас мы сидим вместе в уютной кофейне, пьём горячее какао с маршмеллоу и обсуждаем всё на свете. 🥐✨
+            </p>
+          </div>
+        `;
+      }
+      document.getElementById('modalOverlay').classList.remove('hidden');
+    }
+
+    function openEnvelope(type) {
+      playSoftPop();
+      const content = document.getElementById('modalContent');
+      let title = "", text = "", emoji = "";
+
+      if (type === 'sad') {
+        emoji = "🌧️";
+        title = "Открой, когда грустно";
+        text = "Киса, помни: даже если день не задался, ты не одна. Я всегда мысленно обнимаю тебя, держу за руку и верю в тебя. Всё обязательно будет хорошо! Позвони мне или просто напиши, я рядом. ❤️";
+      } else if (type === 'miss') {
+        emoji = "💌";
+        title = "Открой, когда скучаешь";
+        text = "Я скучаю по тебе ничуть не меньше. Каждый день я смотрю на часы и жду момента, когда мы снова спишемся, созвонимся или смотреть что-то тупое. Ты — моё самое теплое место во вселенной.";
+      } else if (type === 'anniversary') {
+        emoji = "🎉";
+        title = "С 1 Годовщиной, Любимая!";
+        text = "Уля, родная моя! Поздравляю нас с этим первым официальным годом! С 3 ноября 2025 года моя жизнь стала в тысячу раз ярче и счастливее. Спасибо за все наши разговоры, за шутки, ролки, просмотры и 252 995 сообщений! Люблю тебя! 💕";
+        confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
+      } else if (type === 'smile') {
+        emoji = "😊";
+        title = "Минутка Улыбки";
+        text = "Напоминание дня: Ты самая невероятная, красивая и шикарная девочка! 💍✨";
+      }
+
+      content.innerHTML = `
+        <div class="text-center">
+          <span class="text-5xl mb-2 inline-block">${emoji}</span>
+          <h3 class="text-2xl font-bold text-rosedark mb-3 font-handwritten">${title}</h3>
+          <p class="text-xs md:text-sm text-rose-800 leading-relaxed bg-pink-50/80 p-4 rounded-2xl border border-pink-100">${text}</p>
+        </div>
+      `;
+      document.getElementById('modalOverlay').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      playSoftPop();
+      document.getElementById('modalOverlay').classList.add('hidden');
+    }
+
+    /* Live Counter Logic */
+    const startDate = new Date("2025-11-03T00:00:00");
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      if (diff >= 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('timer-days').innerText = days;
+        document.getElementById('timer-hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('timer-minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('timer-seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+      }
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    /* Mini Match Game Logic */
+    const gameIcons = ['🐱', '☕', '💍', '📜', '🍔', '🎀'];
+    let deck = [...gameIcons, ...gameIcons];
+    deck.sort(() => Math.random() - 0.5);
+
+    let flippedCards = [];
+    let matchedPairs = 0;
+
+    function buildGame() {
+      const board = document.getElementById('memoryBoard');
+      board.innerHTML = '';
+      deck.forEach((icon, index) => {
+        const btn = document.createElement('button');
+        btn.className = "h-20 bg-white/90 hover:bg-white rounded-2xl border border-pink-200 text-3xl flex items-center justify-center shadow-sm transition transform active:scale-95";
+        btn.dataset.icon = icon;
+        btn.dataset.index = index;
+        btn.innerText = '❓';
+        btn.onclick = () => handleCardClick(btn);
+        board.appendChild(btn);
+      });
+    }
+
+    function handleCardClick(btn) {
+      if (flippedCards.length >= 2 || btn.innerText !== '❓') return;
+      playSoftPop();
+
+      btn.innerText = btn.dataset.icon;
+      btn.classList.add('bg-pink-100');
+      flippedCards.push(btn);
+
+      if (flippedCards.length === 2) {
+        const [c1, c2] = flippedCards;
+        if (c1.dataset.icon === c2.dataset.icon) {
+          playSuccessChime();
+          matchedPairs++;
+          document.getElementById('gameScore').innerText = `Найдено пар: ${matchedPairs} / 6`;
+          flippedCards = [];
+          if (matchedPairs === 6) {
+            document.getElementById('secretGiftCard').classList.remove('hidden');
+            confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+          }
+        } else {
+          setTimeout(() => {
+            c1.innerText = '❓';
+            c2.innerText = '❓';
+            c1.classList.remove('bg-pink-100');
+            c2.classList.remove('bg-pink-100');
+            flippedCards = [];
+          }, 800);
+        }
+      }
+    }
+
+    // Initialize Lucide Icons, Game & Draggables on Load
+    window.onload = function() {
+      lucide.createIcons();
+      buildGame();
+      initDraggables();
+    };
+  </script>
+</body>
+</html>
